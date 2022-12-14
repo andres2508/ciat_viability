@@ -20,7 +20,11 @@ class CIATMobileApp extends StatefulWidget {
 class _CIATMobileAppState extends State<CIATMobileApp> {
   final CIATRouter _router = CIATRouter();
   final _theme = ThemeData(
-      appBarTheme: AppBarTheme(color: Colors.white),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white,
+        titleTextStyle: TextStyle(color: Colors.black54, fontSize: 22),
+        iconTheme: IconThemeData(color: Colors.black54),
+      ),
       primaryColor: ColorStyles.accentColor,
       primaryColorDark: ColorStyles.accentColor,
       elevatedButtonTheme: ElevatedButtonThemeData(
