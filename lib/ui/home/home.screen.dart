@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gg_viability/infrastructure/security/session/ciat.session.dart';
 import 'package:gg_viability/styles/color.styles.dart';
+import 'package:gg_viability/ui/home/drawer.menu.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -35,7 +36,9 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: CIATMenuWidget(),
+      ),
       body: Column(
         children: [
           Padding(
@@ -74,7 +77,7 @@ class HomeScreen extends StatelessWidget {
           textAlign: TextAlign.center,
         )),
         decoration: BoxDecoration(
-            color: ColorStyles.accentColor,
+            color: ColorStyles.darkColor,
             borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
     );
