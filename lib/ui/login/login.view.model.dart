@@ -1,19 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:gg_viability/infrastructure/locator/service.locator.dart';
 import 'package:gg_viability/infrastructure/security/session/ciat.session.dart';
 import 'package:gg_viability/ui/common/base.view.model.dart';
-import 'package:gg_viability/ui/user/users.model.dart';
+import 'package:gg_viability/ui/platform/dialog/dialogs.service.dart';
+import 'package:gg_viability/ui/platform/messages/message.dart';
 
 class LoginViewModel extends BaseViewModel {
-  List<User> _users = [];
+  final DialogsService messagesService = serviceLocator<DialogsService>();
 
-  List<User> get users => this._users;
-  User get currentUser => this.currentUser!;
-
-  Future<void> loadUsers() async {
-    notifyUI();
-    notifyListeners();
-  }
-
-  void setCurrentUser(String userId) {
-    CIATSession.setCurrentUser( _users.firstWhere((element) => element.id == userId) );
+  Future<void> login(
+      String username, String password, BuildContext context) async {
+    await CIATSession.loginBasic(username, password).catchError((error, _) {
+      messagesService.onError(Message.error(error.toString()));
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    });
+    this.notifyUI();
+    this.notifyListeners();
+    print(CIATSession.currentUser != null
+        ? "Loggin Correct: ${CIATSession.currentUser!.name}"
+        : "Bad credentials!!");
+    if (CIATSession.currentUser != null) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+    }
   }
 }

@@ -20,21 +20,23 @@ class CIATMobileApp extends StatefulWidget {
 class _CIATMobileAppState extends State<CIATMobileApp> {
   final CIATRouter _router = CIATRouter();
   final _theme = ThemeData(
-      appBarTheme: AppBarTheme(color: ColorStyles.accentColor),
+      appBarTheme: AppBarTheme(color: Colors.white),
       primaryColor: ColorStyles.accentColor,
       primaryColorDark: ColorStyles.accentColor,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: ColorStyles.accentColor)),
       textTheme: TextTheme(
-        bodyText1: TextStyle(fontSize: 20.0),
-        bodyText2: TextStyle(fontSize: 18.0),
-        button: TextStyle(fontSize: 20.0),
-      )
-  );
+        bodyText1: TextStyle(fontSize: 22.0, color: Colors.black54),
+        bodyText2: TextStyle(fontSize: 20.0, color: Colors.black54),
+        button: TextStyle(fontSize: 18.0, color: ColorStyles.accentColor),
+      ));
 
   @override
   void initState() {
     super.initState();
     for (final module in modules) {
-      _router.addRoutes( module.routes() );
+      _router.addRoutes(module.routes());
     }
   }
 
