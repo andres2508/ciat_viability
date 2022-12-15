@@ -4,9 +4,23 @@ import 'dart:io';
 
 import 'package:gg_viability/framework/failure.model.dart';
 import 'package:gg_viability/infrastructure/configuration/global.configuration.dart';
+import 'package:gg_viability/infrastructure/http/http.interceptor.dart';
 import 'package:http/http.dart';
 
 typedef S ItemCreator<S>(Map<String, dynamic> json);
+
+class HttpInterceptors {
+  static final List<RequestInterceptor> _requestInterceptors = [];
+  static final List<ResponseInterceptor> _responseInterceptors = [];
+
+  static addRequestInterceptor(RequestInterceptor interceptor) {
+    _requestInterceptors.add(interceptor);
+  }
+
+  static addResponseInterceptor(ResponseInterceptor interceptor) {
+    _responseInterceptors.add(interceptor);
+  }
+}
 
 class HttpDataSource {
   String _authority;
@@ -81,8 +95,10 @@ class HttpDataSource {
 
   Future<Response> _executeRequest(Request request) async {
     try {
+      _interceptRequest(request);
       var response = await Response.fromStream(
           await request.send().timeout(Duration(seconds: 20)));
+      _interceptResponse(response);
       _checkAndThrowError(response);
       return response;
     } on TimeoutException {
@@ -101,5 +117,17 @@ class HttpDataSource {
   Failure _connectionError() {
     return Failure.of('Ocurrio un error realizando la solicitud.'
         ' Verifique que esté conectado a la red e intente de nuevo.');
+  }
+
+  void _interceptResponse(Response response) {
+    for (final interceptor in HttpInterceptors._responseInterceptors) {
+      interceptor.interceptResponse(response);
+    }
+  }
+
+  void _interceptRequest(Request request) {
+    for (final interceptor in HttpInterceptors._requestInterceptors) {
+      interceptor.interceptRequest(request);
+    }
   }
 }

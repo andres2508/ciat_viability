@@ -5,6 +5,7 @@ import 'package:gg_viability/infrastructure/configuration/global.configuration.d
 import 'package:gg_viability/infrastructure/http/http.interceptor.dart';
 import 'package:gg_viability/infrastructure/security/local/authorization.exception.dart';
 import 'package:gg_viability/infrastructure/security/session/ciat.session.dart';
+import 'package:http/src/request.dart';
 import 'package:http/src/response.dart';
 
 class AuthResponseInterceptor implements ResponseInterceptor {
@@ -30,6 +31,18 @@ class AuthResponseInterceptor implements ResponseInterceptor {
           GlobalCIATConfiguration.controller.authServer +
           ". API: ${GlobalCIATConfiguration.controller.apiServer}" +
           ". Codigo: ${response.statusCode}");
+    }
+  }
+}
+
+class AuthRequestInterceptor implements RequestInterceptor {
+  @override
+  void interceptRequest(Request request) {
+    final userBearer = CIATSession.currentUser;
+    if (userBearer != null && !userBearer.isExpire()) {
+      request.headers['Authorization'] = "Bearer ${userBearer.accessToken}";
+    } else {
+      throw new CIATAuthorizationException("Usuario no autenticado");
     }
   }
 }

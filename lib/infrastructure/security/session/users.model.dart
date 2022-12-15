@@ -12,4 +12,8 @@ class User {
     this.accessToken = authentication.accessToken;
     this._expirationTime = Jwt.getExpiryDate(authentication.accessToken);
   }
+
+  bool isExpire() {
+    return DateTime.now().compareTo(this._expirationTime!) > 0;
+  }
 }

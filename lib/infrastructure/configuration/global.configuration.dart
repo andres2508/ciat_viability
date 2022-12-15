@@ -1,5 +1,5 @@
 class GlobalCIATConfiguration {
-  String _apiServer = 'http://192.168.20.249:8081/api';
+  String _apiServer = 'http://192.168.20.249:8081/api/v1';
   String _authServer = 'http://192.168.20.249:8081/oauth';
 
   static final String CLIENT_ID = "defaultclient@localhost";

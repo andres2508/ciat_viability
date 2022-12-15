@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gg_viability/infrastructure/security/session/ciat.session.dart';
 import 'package:gg_viability/styles/color.styles.dart';
+import 'package:gg_viability/ui/home/appbar.widget.dart';
 import 'package:gg_viability/ui/home/drawer.menu.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,32 +9,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 90,
-        iconTheme: IconThemeData(color: ColorStyles.accentColor),
-        centerTitle: true,
-        title: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: SizedBox(
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("USUARIO: ${CIATSession.currentUser!.name}"),
-                    _onlineState(),
-                    _syncState()
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, right: 80),
-              child: Text('CULTIVO PARA EVALUAR'),
-            )
-          ],
-        ),
+      appBar: CIATAppBarWidget(
+        title: 'Cultivo para evaluar',
       ),
       drawer: Drawer(
         child: CIATMenuWidget(),
@@ -53,7 +29,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _optionWidget('Frijol'.toUpperCase(),
-                    () => Navigator.pushNamed(context, 'beans/pendings')),
+                    () => Navigator.pushNamed(context, 'beans/pending')),
                 SizedBox(width: 30),
                 _optionWidget('Forrajes'.toUpperCase(),
                     () => Navigator.pushNamed(context, 'forage/pendings')),
@@ -81,30 +57,5 @@ class HomeScreen extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
     );
-  }
-
-  Widget _onlineState() {
-    // TODO: make model view online state, should be global provider
-    return Row(
-      children: [
-        Container(
-          height: 20,
-          width: 20,
-          decoration: BoxDecoration(
-              color: ColorStyles.accentColor, shape: BoxShape.circle),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Text(
-            'EN LINEA',
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _syncState() {
-    // TODO: make model view sync state, should be global provider
-    return Text('SINCRONIZADO: ${DateTime.now().toString().split(' ')[0]}');
   }
 }

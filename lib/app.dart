@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gg_viability/styles/color.styles.dart';
+import 'package:gg_viability/ui/crop/bean/bean.module.dart';
 import 'package:gg_viability/ui/login/login.view.model.dart';
 import 'package:gg_viability/ui/main.module.dart';
 import 'package:gg_viability/ui/platform/ciat.module.dart';
@@ -8,7 +9,7 @@ import 'package:provider/provider.dart';
 
 List<CIATViewModule> modules = [
   MainModule(),
-];
+  BeanModule()];
 
 class CIATMobileApp extends StatefulWidget {
   const CIATMobileApp({Key? key}) : super(key: key);

@@ -32,7 +32,7 @@ class _CIATMenuWidgetState extends State<CIATMenuWidget> {
             thickness: 2,
           ),
           _menuTitle('Frijol'),
-          _optionMenu('Pendientes por recibir', 'home'),
+          _optionMenu('Pendientes por recibir', 'beans/pending'),
           _optionMenu('Contratos recibidos', 'home'),
           Divider(
             thickness: 2,
