@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gg_viability/styles/color.styles.dart';
 import 'package:gg_viability/ui/common/view.model.consumer.dart';
-import 'package:gg_viability/ui/crop/bean/contract/pending_contract.view.model.dart';
+import 'package:gg_viability/ui/crop/bean/order/bean_order.view.model.dart';
 import 'package:gg_viability/ui/home/appbar.widget.dart';
 import 'package:provider/provider.dart';
 
-class BeanPendingContractList extends StatefulWidget {
-  const BeanPendingContractList({Key? key}) : super(key: key);
+class BeanPendingOrderList extends StatefulWidget {
+  const BeanPendingOrderList({Key? key}) : super(key: key);
 
   @override
-  State<BeanPendingContractList> createState() =>
-      _BeanPendingContractListState();
+  State<BeanPendingOrderList> createState() => _BeanPendingOrderListState();
 }
 
-class _BeanPendingContractListState extends State<BeanPendingContractList> {
-  final BeanPendingContractViewModel _model = BeanPendingContractViewModel();
+class _BeanPendingOrderListState extends State<BeanPendingOrderList> {
+  final BeanPendingOrderViewModel _model = BeanPendingOrderViewModel();
 
   @override
   void initState() {
@@ -24,7 +23,7 @@ class _BeanPendingContractListState extends State<BeanPendingContractList> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<BeanPendingContractViewModel>(
+    return ChangeNotifierProvider<BeanPendingOrderViewModel>(
       create: (_) => _model,
       child: Scaffold(
           appBar: CIATAppBarWidget(title: 'Frijol Contratos para recibir'),
@@ -66,7 +65,7 @@ class _BeanPendingContractListState extends State<BeanPendingContractList> {
   }
 
   Widget _orderList() {
-    return ViewModelConsumer<BeanPendingContractViewModel>(
+    return ViewModelConsumer<BeanPendingOrderViewModel>(
         builder: (context, model, _) {
       return GridView.count(
         padding: EdgeInsets.symmetric(horizontal: 10),
