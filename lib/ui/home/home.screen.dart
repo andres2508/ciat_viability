@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gg_viability/styles/color.styles.dart';
-import 'package:gg_viability/ui/home/appbar.widget.dart';
+import 'package:gg_viability/ui/common/appbar.widget.dart';
 import 'package:gg_viability/ui/home/drawer.menu.dart';
 
 class HomeScreen extends StatelessWidget {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gg_viability/styles/color.styles.dart';
+import 'package:gg_viability/ui/common/appbar.widget.dart';
 import 'package:gg_viability/ui/common/view.model.consumer.dart';
 import 'package:gg_viability/ui/crop/bean/order/bean_order.view.model.dart';
 import 'package:gg_viability/ui/crop/bean/order/request/order_request.list.dart';
-import 'package:gg_viability/ui/home/appbar.widget.dart';
+import 'package:gg_viability/ui/home/drawer.menu.dart';
 import 'package:provider/provider.dart';
 
 class BeanPendingOrderList extends StatefulWidget {
@@ -27,6 +28,9 @@ class _BeanPendingOrderListState extends State<BeanPendingOrderList> {
     return ChangeNotifierProvider<BeanPendingOrderViewModel>(
       create: (_) => _model,
       child: Scaffold(
+          drawer: const Drawer(
+            child: CIATMenuWidget(),
+          ),
           appBar: CIATAppBarWidget(title: 'Frijol Contratos para recibir'),
           body: Column(
             children: [

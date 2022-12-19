@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gg_viability/domain/crop/bean/order/request/model/order_request.model.dart';
 import 'package:gg_viability/infrastructure/locator/service.locator.dart';
 import 'package:gg_viability/styles/color.styles.dart';
+import 'package:gg_viability/ui/common/appbar.widget.dart';
 import 'package:gg_viability/ui/common/future_wrapper.widget.dart';
 import 'package:gg_viability/ui/common/view.model.consumer.dart';
 import 'package:gg_viability/ui/crop/bean/order/request/order_request.view.model.dart';
-import 'package:gg_viability/ui/home/appbar.widget.dart';
 import 'package:gg_viability/ui/platform/messages/messages.service.dart';
 import 'package:provider/provider.dart';
 
