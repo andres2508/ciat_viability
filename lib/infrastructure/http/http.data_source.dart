@@ -93,6 +93,20 @@ class HttpDataSource {
     return Future.value(mapped);
   }
 
+  Future<X> post<X>(
+      {String? path, dynamic body, ItemCreator<X>? itemCreator}) async {
+    Uri uri = baseUri(path: path);
+    final request = new Request('POST', uri);
+    request.body = json.encode(body);
+    var response = await _executeRequest(request);
+    if (itemCreator != null) {
+      final json = jsonDecode(response.body);
+      return Future.value(itemCreator(json));
+    } else {
+      return Future.value();
+    }
+  }
+
   Future<Response> _executeRequest(Request request) async {
     try {
       _interceptRequest(request);

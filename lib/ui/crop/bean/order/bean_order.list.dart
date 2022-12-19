@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gg_viability/styles/color.styles.dart';
 import 'package:gg_viability/ui/common/view.model.consumer.dart';
 import 'package:gg_viability/ui/crop/bean/order/bean_order.view.model.dart';
+import 'package:gg_viability/ui/crop/bean/order/request/order_request.list.dart';
 import 'package:gg_viability/ui/home/appbar.widget.dart';
 import 'package:provider/provider.dart';
 
@@ -74,16 +75,21 @@ class _BeanPendingOrderListState extends State<BeanPendingOrderList> {
         crossAxisCount: 3,
         childAspectRatio: 5,
         children: model.orders
-            .map((e) => Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Center(
-                      child: Text(
-                    'CONTRATO ${e.id} (${e.numberOfItems})',
-                    style: TextStyle(color: ColorStyles.darkColor),
-                    textAlign: TextAlign.center,
-                  )),
+            .map((e) => GestureDetector(
+                  onTap: () => Navigator.pushNamed(
+                      context, 'beans/pending/detail',
+                      arguments: OrderRequestListParams(e.id)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Center(
+                        child: Text(
+                      'CONTRATO ${e.id} (${e.numberOfItems})',
+                      style: TextStyle(color: ColorStyles.darkColor),
+                      textAlign: TextAlign.center,
+                    )),
+                  ),
                 ))
             .toList(),
       );

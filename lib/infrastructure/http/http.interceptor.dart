@@ -14,5 +14,6 @@ class HttpOriginRequestInterceptor implements RequestInterceptor {
   void interceptRequest(Request request) {
     // ToDo: Allowed origins but is neccesary configurable
     request.headers['Origin'] = GlobalCIATConfiguration.controller.apiServer;
+    request.headers['Content-Type'] = 'application/json';
   }
 }
