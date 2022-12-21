@@ -4,6 +4,7 @@ import 'package:gg_viability/ui/crop/bean/bean.module.dart';
 import 'package:gg_viability/ui/login/login.view.model.dart';
 import 'package:gg_viability/ui/main.module.dart';
 import 'package:gg_viability/ui/platform/ciat.module.dart';
+import 'package:gg_viability/ui/platform/online/state/online_state.model.view.dart';
 import 'package:gg_viability/ui/router.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +37,7 @@ class _CIATMobileAppState extends State<CIATMobileApp> {
         bodyText2: TextStyle(fontSize: 20.0, color: Colors.black54),
         button: TextStyle(fontSize: 18.0, color: ColorStyles.accentColor),
       ));
+  final OnlineServerStateViewModel _onlineModel = OnlineServerStateViewModel();
 
   @override
   void initState() {
@@ -46,9 +48,19 @@ class _CIATMobileAppState extends State<CIATMobileApp> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _onlineModel.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<LoginViewModel>(
-      create: (_) => LoginViewModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<LoginViewModel>(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider<OnlineServerStateViewModel>(
+            create: (_) => _onlineModel)
+      ],
       child: MaterialApp(
         title: 'CIAT Flutter',
         debugShowCheckedModeBanner: false,

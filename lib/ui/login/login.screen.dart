@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gg_viability/infrastructure/locator/service.locator.dart';
+import 'package:gg_viability/ui/common/appbar.widget.dart';
 import 'package:gg_viability/ui/common/view.model.consumer.dart';
 import 'package:gg_viability/ui/login/login.view.model.dart';
 import 'package:gg_viability/ui/platform/dialog/dialogs.service.dart';
@@ -21,7 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return ViewModelConsumer<LoginViewModel>(builder: (context, model, _) {
       return Scaffold(
-        appBar: AppBar(),
+        appBar: CIATAppBarWidget(
+          title: 'Es una prueba',
+          isLoginView: true,
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 30),
