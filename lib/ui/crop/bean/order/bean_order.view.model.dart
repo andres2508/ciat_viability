@@ -11,7 +11,7 @@ class BeanPendingOrderViewModel extends BaseViewModel {
   List<BeanOrderContent> get orders => _orders;
 
   Future<void> loadRequired() async {
-    _orders = (await _service.findAll()).content;
+    _orders = (await _service.findAllForViability()).content;
     notifyUI();
     notifyListeners();
   }
